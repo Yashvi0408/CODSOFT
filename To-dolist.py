@@ -1,9 +1,6 @@
-#To-do list app 
-
 def main():
-    task = []
-    def show_menu():  
-     while True:   
+    tasks = []
+    while True:
         print("\n===To-do List===")
         print("1. Add Task")
         print("2. Show Task")
@@ -13,23 +10,27 @@ def main():
         choice = input("Enter your choice: ")
         if choice == '1':
             print()
-            n_task = int(input("How many task you want to add: "))
-
+            n_task = int(input("How many tasks do you want to add: "))
             for i in range(n_task):
-                task = input("Enter the task: ")
-                task.append({"task": task, "Done": False})
+                task_desc = input("Enter the task: ")
+                tasks.append({"task": task_desc, "Done": False})
                 print("Task added!")
 
         elif choice == '2':
             print("\nTasks")
-            for index, task in enumerate(task):
-                status = "Done" if task["Done"] else "Not Done"
-                print(f"{index + 1}. {task['task']} - {status}")
-            
+            if not tasks:
+                print("No tasks to show.")
+            for index, t in enumerate(tasks):
+                status = "Done" if t["Done"] else "Not Done"
+                print(f"{index + 1}. {t['task']} - {status}")
+
         elif choice == '3':
+            if not tasks:
+                print("No tasks to mark as done.")
+                continue
             task_index = int(input("Enter the task number to mark as done: ")) - 1
-            if 0 <= task_index < len(task):
-                task[task_index] ["Done"] = True
+            if 0 <= task_index < len(tasks):
+                tasks[task_index]["Done"] = True
                 print("Task marked as done.")
             else:
                 print("Invalid task number.")
@@ -41,5 +42,5 @@ def main():
         else:
             print("Invalid choice. Please try again.")
 
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    main()
